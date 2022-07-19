@@ -76,6 +76,74 @@ def twoPlayer(p1Name,p2Name,p1Cards,p2Cards) :
     else:
         print('Congratulations',p2Name,'You Won!')
         exit()   
+   
+def threePlayer(p1Name,p2Name,p3Name,p1Cards,p2Cards,p3Cards):
+    p3Played=genRandomCard()
+    print(p3Played)
+    print(p1Name, 'is First')
+    #checks player 1 has a card to play
+    while len(p1Cards) !=0 and len(p2Cards) !=0 and len(p3Cards) != 0:
+        while checkCanPlay(p1Cards,p3Played) == False:
+            print('You do not have a card to play please pick up another')
+            p1Cards.append(genRandomCard())
+        else:
+            print('these are',p1Name+'\'s cards\n',p1Cards)
+            print('this is the card played',p3Played)
+    #takes the index as input for p1s choice
+        p1Choice=int(input('Please enter the index of the card you would like to play: \n'))
+        while checkUserChoseWrong(p1Cards[p1Choice],p3Played) == False:
+            print(p1Cards)
+            p1Choice=int(input('Please choose the index of a matching card: '))
+        #saving player ones choice for later
+        p1Played=p1Cards[p1Choice]
+        #removing p1s choice from his deck
+        p1Cards.remove(p1Cards[p1Choice])
+        #test
+        #print(p1Played)
+        #shows p1 their cards after their turn
+        print(p1Name,'These are your cards now,',p1Cards)
+        #player 2's turn
+        print(p2Name, 'These are your cards',p2Cards)
+        while checkCanPlay(p2Cards,p1Played) == False:
+            print('You do not have a card to play please pick up another')
+            p2Cards.append(genRandomCard())
+            
+        print('these are',p2Name+'\'s cards\n',p2Cards)
+        print('this is the card played',p1Played)
+        p2Choice=int(input('Please enter the index of the card you would like to play: \n'))
+        while checkUserChoseWrong(p2Cards[p2Choice],p1Played) == False:
+            print(p2Cards)
+            p2Choice=int(input('Please choose the index of a matching card: '))
+        p2Played=p2Cards[p2Choice]
+        p2Cards.remove(p2Cards[p2Choice])
+        print(p2Name, 'these are your cards now',p2Cards)
+        # player threes turn
+        print(p3Name, 'These are your cards',p3Cards)
+        while checkCanPlay(p3Cards,p2Played) == False:
+            print('You do not have a card to play please pick up another')
+            p3Cards.append(genRandomCard())
+            
+        print('these are',p3Name+'\'s cards\n',p3Cards)
+        print('this is the card played',p2Played)
+        p3Choice=int(input('Please enter the index of the card you would like to play: \n'))
+        while checkUserChoseWrong(p3Cards[p3Choice],p2Played) == False:
+            print(p3Cards)
+            p3Choice=int(input('Please choose the index of a matching card: '))
+        p3Played=p3Cards[p3Choice]
+        p3Cards.remove(p3Cards[p3Choice])
+        print(p3Name, 'these are your cards now',p3Cards)
+    if len(p1Cards)==0:
+        print('Congratulations',p1Name,'You Won!')
+        exit()
+    elif len(p2Cards)==0:
+        print('Congratulations',p2Name,'You Won!')
+        exit()   
+    else:
+         print('Congratulations',p3Name,'You Won!')
+         exit()   
+        
+    
+    
     
 def howManyPlayers():
     numPlayers = 1
@@ -117,6 +185,11 @@ def main():
         NamesArr = getNames(numPlayers)
         p1Name = NamesArr[0]
         p2Name = NamesArr[1]
+        if numPlayers == 3:
+            p3Name=NamesArr[2]
+        if numPlayers == 4:
+            p3Name=NamesArr[2]
+            p4Name=NamesArr[3]
         for x in range(5):
             p1Cards.append(genRandomCard())
             p2Cards.append(genRandomCard())
@@ -132,6 +205,8 @@ def main():
                 p4Cards.append(genRandomCard())
         if numPlayers==2:
             twoPlayer(p1Name,p2Name,p1Cards,p2Cards)
+        elif numPlayers==3:
+            threePlayer(p1Name,p2Name,p3Name,p1Cards,p2Cards,p3Cards)
            
 
                 
