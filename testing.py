@@ -54,19 +54,31 @@
 #                     print('These are your cards\n',p1Cards,'\nPlease choose one that mathces the number or color of', p2Played)
 #                     p1Played=int(input('Please select the correct index: '))
 
-def checkCanPlay(Arr1,Arr2):
-    i=0
-    x=0
-    while i<len(Arr1):
-        indList=(Arr1[i])
-    #print(indList)
-        if Arr2[0] == indList[0] or Arr2[1] == indList[1]:
-            x+=1
-        i+=1
-    if x==0:
-        return False
-    else:
-        return True
+# def checkCanPlay(Arr1,Arr2):
+#     i=0
+#     x=0
+#     while i<len(Arr1):
+#         indList=(Arr1[i])
+#     #print(indList)
+#         if Arr2[0] == indList[0] or Arr2[1] == indList[1]:
+#             x+=1
+#         i+=1
+#     if x==0:
+#         return False
+#     else:
+#         return True
     
     
-print(checkCanPlay([['red', 2], ['green', 3], ['Yellow', 5], ['blue', 9], ['blue', 6]],['bue',9]))
+# print(checkCanPlay([['red', 2], ['green', 3], ['Yellow', 5], ['blue', 9], ['blue', 6]],['bue',9]))
+def genRandomCard():
+    import random
+    rNum=random.randint(0,9)
+    rNum2=random.randint(0,2)
+    if rNum2 ==0:
+        color='Red'
+    if rNum2 ==1:
+        color = 'Yellow'
+    if rNum2==2:
+        color = 'Green'
+    return [color,rNum]
+print(genRandomCard())
